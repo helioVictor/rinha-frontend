@@ -1,17 +1,40 @@
-import { ChangeEvent } from "react";
-import "./JSONUploader.css";
+import { ChangeEvent } from 'react';
+import './JSONUploader.css';
 
 const JSONUploader = ({
   label,
-  onUpload,
+  setFile,
+  setJSONData,
 }: {
   label: string;
-  onUpload: (e: ChangeEvent<HTMLInputElement>) => void;
+  setFile: (file?: File) => void;
+  setJSONData: (data?: string) => void;
 }) => {
+  const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
+    const uploadedFile = event.target.files?.[0];
+    setFile(uploadedFile);
+
+    // Read the JSON content
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const parsedJson = JSON.parse(String(e.target?.result));
+        setJSONData(parsedJson);
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+      }
+    };
+    reader.readAsText(uploadedFile || new Blob());
+  };
   return (
     <>
-      <input type="file" id="jsonUploader" accept=".json" onChange={onUpload} />
-      <label htmlFor="jsonUploader">{label}</label>
+      <input
+        type='file'
+        id='jsonUploader'
+        accept='.json'
+        onChange={handleFileUpload}
+      />
+      <label htmlFor='jsonUploader'>{label}</label>
     </>
   );
 };

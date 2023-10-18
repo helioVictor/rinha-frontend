@@ -1,6 +1,6 @@
-@import url("../../theme.css");
+@import url('../../theme.css');
 
-.container {
+.initial-content-container {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -10,15 +10,29 @@
   width: 100%;
 }
 
-.container h1 {
+.initial-content-container h1 {
   font-size: 4.8rem;
 }
 
-.container .subtitle {
+.initial-content-container .subtitle {
   font-size: 2.4rem;
 }
 
-.container .error-message {
+.initial-content-container .error-message {
   color: var(--error-color);
+  font-size: 1.6rem;
+}
+
+.file-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.file-content-container h1 {
+  font-size: 3.2rem;
+}
+
+.json-tree-container {
   font-size: 1.6rem;
 }
